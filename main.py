@@ -15,10 +15,12 @@ def HandleLoadToDo():
 
 def HandleCreateToDo():
     print("handling todo loading, this should just create any needed data for a ToDo to exist and send it to HandleOpenToDo")
-    HandleOpenToDo()
+    HandleOpenToDo(["item1", "item2"])
 
-def HandleOpenToDo():
+def HandleOpenToDo(stringList):
     print("handling todo opening, this is where the bulk of the application will be")
+    for stringElement in stringList:
+        print(stringElement)
 
 def HandleToDoSaving():
     print("handling todo opening, this is where a file browser will open to save a file to a location, and return to the start of the program")
