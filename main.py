@@ -83,7 +83,7 @@ def HandleOpenToDo(stringList):
     print("===ToDo List===")
 
     #command detection loop
-    commandList = "Input a numbered command:\n[1] Create a ToDo element\n[2] Delete a ToDo element\n[3] Save ToDo to disk\n[4] Quit\n"
+    commandList = "Input a numbered command:\n[1] Create a ToDo element\n[2] Delete a ToDo element\n[3] Save ToDo to disk\n[4] Quit to main menu (WARNING ALL CHANGES WILL BE LOST)\n"
     print(commandList)
     while True:
         try:
@@ -107,8 +107,8 @@ def HandleOpenToDo(stringList):
                     SaveToDoFile(stringList)
                     main()
                 case 4:
-                    print(f"Detected command '{inputInt}' Quitting")
-                    exit()
+                    print(f"Detected command '{inputInt}' Quitting to main menu")
+                    break
                 case _:
                     print(f"Detected command '{inputInt}'. This is an invalid command")
         except ValueError:
