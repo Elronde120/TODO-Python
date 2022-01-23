@@ -51,8 +51,13 @@ def GetElementToDeleteIndex(maxIntValue):
 def HandleLoadToDo():
     if M_DEBUG_PRINT:
         print("handling todo loading, this should just open the file browser for file selection")
-    #TODO: Account for the user canceling file selection
-    file = open(GetFileNameAndPath())
+        
+    fileNameAndPath = GetFileNameAndPath()
+    if fileNameAndPath == None:
+        print("ERROR: File not chosen for loading. Booting back to main menu")
+        main()
+
+    file = open(fileNameAndPath, 'r')
     todoContents = ReadToDoFile(file)
     HandleOpenToDo(todoContents)
 
