@@ -7,7 +7,7 @@ A TODO app that can
 	* Create a todo element
 		* Each element just contains a string representing the todo
 	* Delete a todo element
-	*Save a list of todos to a file
+	* Save a list of todos to a file
 	* Load a list of todos to a file
 
 All required moduls are in Requirements.txt, just run  pip install -r requirements.txt
