@@ -1,5 +1,8 @@
+import sys
 import easygui
 import os
+
+M_DEBUG_PRINT = False
 
 def GetFileNameAndPath():
     fileNameAndPath = easygui.fileopenbox()
@@ -10,6 +13,7 @@ def GetFolderPath():
     return file
 
 def SaveToDoFile(stringList):
+    #TODO: Account for the user canceling file selection
     path = GetFolderPath()
     fileName = input("Input the name of the file:\n")
     fileName += ".txt"
@@ -45,23 +49,29 @@ def GetElementToDeleteIndex(maxIntValue):
             print(f"input '{stringInput}' was not a number")
 
 def HandleLoadToDo():
-    print("handling todo loading, this should just open the file browser for file selection")
+    if M_DEBUG_PRINT:
+        print("handling todo loading, this should just open the file browser for file selection")
+    #TODO: Account for the user canceling file selection
     file = open(GetFileNameAndPath())
     todoContents = ReadToDoFile(file)
     HandleOpenToDo(todoContents)
 
 def HandleCreateToDo():
-    print("handling todo loading, this should just create any needed data for a ToDo to exist and send it to HandleOpenToDo")
+    if M_DEBUG_PRINT:
+        print("handling todo loading, this should just create any needed data for a ToDo to exist and send it to HandleOpenToDo")
     HandleOpenToDo([])
 
 def HandleOpenToDo(stringList):
-    print("handling todo opening, this is where the bulk of the application will be")
+    if M_DEBUG_PRINT:
+        print("handling todo opening, this is where the bulk of the application will be")
 
     #print out the todo list
     index = 0
+    print("===ToDo List===")
     for stringElement in stringList:
         print(f"[{index}] {stringElement}")
         index += 1
+    print("===ToDo List===")
 
     #command detection loop
     commandList = "Input a numbered command:\n[1] Create a ToDo element\n[2] Delete a ToDo element\n[3] Save ToDo to disk\n[4] Quit\n"
@@ -86,28 +96,29 @@ def HandleOpenToDo(stringList):
                 case 3:
                     print(f"Detected command '{inputInt}' Opening save file menu")
                     SaveToDoFile(stringList)
-                    break
+                    main()
                 case 4:
                     print(f"Detected command '{inputInt}' Quitting")
                     exit()
-                    break
                 case _:
                     print(f"Detected command '{inputInt}'. This is an invalid command")
         except ValueError:
             print(f"input '{stringInput}' was not a number")
 
-def HandleToDoSaving():
-    print("handling todo opening, this is where a file browser will open to save a file to a location, and return to the start of the program")
     main()
 
-
 def main():
+    if len(sys.argv) > 1:
+        global M_DEBUG_PRINT
+        M_DEBUG_PRINT = eval(sys.argv[1])
+
     welcomeMessage = "Welcome to Basic ToDo [BTD]"
     menuCommandList = "Input a numbered command:\n[1] Create a ToDo list\n[2] Load a ToDo file\n"
     print(welcomeMessage)
     print(menuCommandList)
 
     #Start the main command detection loop
+    #TODO: Put in a quit command here
     inputInt = 0
     while True:
         try:
