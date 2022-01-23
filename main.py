@@ -113,12 +113,11 @@ def main():
         M_DEBUG_PRINT = eval(sys.argv[1])
 
     welcomeMessage = "Welcome to Basic ToDo [BTD]"
-    menuCommandList = "Input a numbered command:\n[1] Create a ToDo list\n[2] Load a ToDo file\n"
+    menuCommandList = "Input a numbered command:\n[1] Create a ToDo list\n[2] Load a ToDo file\n[3] Quit\n"
     print(welcomeMessage)
     print(menuCommandList)
 
     #Start the main command detection loop
-    #TODO: Put in a quit command here
     inputInt = 0
     while True:
         try:
@@ -133,6 +132,9 @@ def main():
                     print(f"Detected command '{inputInt}' Opening file browser")
                     HandleLoadToDo()
                     break
+                case 3:
+                    print(f"Detected command '{inputInt}' Quitting")
+                    quit()
                 case _:
                     print(f"Detected command '{inputInt}'. This is an invalid command")
         except ValueError:
