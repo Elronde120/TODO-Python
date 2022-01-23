@@ -1,5 +1,5 @@
 # TODO-Python
-A simple todo application on the command line using Python
+A simple todo application on the command line using Python. Requires a python installation to run
 
 
 A TODO app that can
