@@ -1,5 +1,6 @@
 import easygui
 import os
+
 def GetFileNameAndPath():
     fileNameAndPath = easygui.fileopenbox()
     return fileNameAndPath
@@ -18,6 +19,12 @@ def SaveToDoFile(stringList):
     for todoElement in stringList:
         file.write(todoElement + "\n")
     file.close()
+
+def ReadToDoFile(todoFile):
+    todoList = []
+    for line in todoFile:
+        todoList.append(line.strip('\n'))
+    return todoList
 
 def CreateNewToDoElement():
     print("Type in your ToDo:\n")
@@ -40,7 +47,8 @@ def GetElementToDeleteIndex(maxIntValue):
 def HandleLoadToDo():
     print("handling todo loading, this should just open the file browser for file selection")
     file = open(GetFileNameAndPath())
-
+    todoContents = ReadToDoFile(file)
+    HandleOpenToDo(todoContents)
 
 def HandleCreateToDo():
     print("handling todo loading, this should just create any needed data for a ToDo to exist and send it to HandleOpenToDo")
