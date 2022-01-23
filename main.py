@@ -1,5 +1,5 @@
 import easygui
-
+import os
 def GetFileNameAndPath():
     fileNameAndPath = easygui.fileopenbox()
     return fileNameAndPath
@@ -7,6 +7,17 @@ def GetFileNameAndPath():
 def GetFolderPath():
     file = easygui.diropenbox()
     return file
+
+def SaveToDoFile(stringList):
+    path = GetFolderPath()
+    fileName = input("Input the name of the file:\n")
+    fileName += ".txt"
+    path = os.path.join(path, fileName)
+
+    file = open(path, 'w')
+    for todoElement in stringList:
+        file.write(todoElement + "\n")
+    file.close()
 
 def CreateNewToDoElement():
     print("Type in your ToDo:\n")
@@ -28,8 +39,8 @@ def GetElementToDeleteIndex(maxIntValue):
 
 def HandleLoadToDo():
     print("handling todo loading, this should just open the file browser for file selection")
-    fileName = GetFileNameAndPath()
-    print(fileName)
+    file = open(GetFileNameAndPath())
+
 
 def HandleCreateToDo():
     print("handling todo loading, this should just create any needed data for a ToDo to exist and send it to HandleOpenToDo")
@@ -45,7 +56,7 @@ def HandleOpenToDo(stringList):
         index += 1
 
     #command detection loop
-    commandList = "Input a numbered command:\n[1] Create a ToDo element\n[2] Delete a ToDo element\n[3] Quit\n"
+    commandList = "Input a numbered command:\n[1] Create a ToDo element\n[2] Delete a ToDo element\n[3] Save ToDo to disk\n[4] Quit\n"
     print(commandList)
     while True:
         try:
@@ -65,6 +76,10 @@ def HandleOpenToDo(stringList):
                     HandleOpenToDo(stringList)
                     break
                 case 3:
+                    print(f"Detected command '{inputInt}' Opening save file menu")
+                    SaveToDoFile(stringList)
+                    break
+                case 4:
                     print(f"Detected command '{inputInt}' Quitting")
                     exit()
                     break
