@@ -13,8 +13,12 @@ def GetFolderPath():
     return file
 
 def SaveToDoFile(stringList):
-    #TODO: Account for the user canceling file selection
     path = GetFolderPath()
+
+    if(path == None):
+        print("ERROR: File location not chosen for loading. Booting back to ToDo menu")
+        HandleOpenToDo(stringList)
+
     fileName = input("Input the name of the file:\n")
     fileName += ".txt"
     path = os.path.join(path, fileName)
@@ -51,7 +55,7 @@ def GetElementToDeleteIndex(maxIntValue):
 def HandleLoadToDo():
     if M_DEBUG_PRINT:
         print("handling todo loading, this should just open the file browser for file selection")
-        
+
     fileNameAndPath = GetFileNameAndPath()
     if fileNameAndPath == None:
         print("ERROR: File not chosen for loading. Booting back to main menu")
